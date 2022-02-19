@@ -46,10 +46,9 @@ def elimina_signos_puntuacion(cadena):
 #
 def dime_columna(tabla, i):
     return [fila[i] for fila in tabla]
-# print(elimina_signos_puntuacion('no, Ãºltima'))
 
 #
-# No usado finalmente, finalmente indicando UTF-8 al importar el csv lo convierte bien en un dataframe
+# No usado finalmente, indicando UTF-8 l latin1 al importar el csv lo convierte bien en un dataframe
 #
 # def repara_acentos(cadena): # -> no es preciso si se abre en UTF-8
 #     # print ('Repara acentos: ' + cadena)
@@ -62,5 +61,3 @@ def dime_columna(tabla, i):
 #         cadena = cadena.replace(elemento, '*'+ acentos[elemento] + '*')
 #     # print(cadena)
 #     return cadena
-
-# # print(repara_acentos('no Ãºltima'))
