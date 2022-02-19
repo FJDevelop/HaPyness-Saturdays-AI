@@ -60,4 +60,4 @@ def dime_columna(tabla, i):
 #         # print (acentos[elemento])
 #         cadena = cadena.replace(elemento, '*'+ acentos[elemento] + '*')
 #     # print(cadena)
-#     return cadena
+#     return cadena # Prueba
