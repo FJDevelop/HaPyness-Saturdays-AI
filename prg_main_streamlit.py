@@ -47,7 +47,7 @@ def principal_streamlit():
     # st.write("https://saturdays.ai/")
     st.title("HaPyness: ¿Aragón feliz?")
     st.header("Análisis algorítmico de sentimientos")
-    # st.subheader("---")
+    # st.subheader("--")
 
     #
     # Si no se ha cargado y procesado el vocabulario, lo prepar
