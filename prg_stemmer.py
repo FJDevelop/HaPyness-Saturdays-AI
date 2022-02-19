@@ -5,27 +5,20 @@ from nltk.stem import SnowballStemmer
 import prg_globales as glb
 import prg_auxiliares as aux
 
-# Mantenemos los stopwords que pueden ser positivos o negativos: dejamos "no"
-# spanish_stopwords.remove('no')
-# print (spanish_stopwords)
-
 #
 # Atención usar antes del stemmer, aún no existe en este punto la columna 'Stemmed'
 #
-
 def quita_stopwords(vocabulario_pd):
     vocabulario_sin_stopwords = glb.pd.DataFrame(columns=['Palabra','Sentimiento','Valoracion'])
     linea = pd.DataFrame(columns=['Palabra','Sentimiento','Valoracion'])
-    for i in range(len(glb.vocabulario_pd)): 
+    for i in range(len(vocabulario_pd)): 
         item = vocabulario_pd.loc[i,"Palabra"]
         if item not in glb.spanish_stopwords or (item in glb.stopwords_permitidas):
-            linea = {'Palabra':glb.vocabulario_pd.loc[i,"Palabra"], 
-                     'Sentimiento':glb.vocabulario_pd.loc[i,"Sentimiento"], 'Valoracion':glb.vocabulario_pd.loc[i,"Valoracion"]}
+            linea = {'Palabra':vocabulario_pd.loc[i,"Palabra"], 
+                     'Sentimiento':vocabulario_pd.loc[i,"Sentimiento"], 'Valoracion':vocabulario_pd.loc[i,"Valoracion"]}
             vocabulario_sin_stopwords = vocabulario_sin_stopwords.append(linea, ignore_index=True)
     aux.debug_pd("QUITA STOPWORDS", vocabulario_sin_stopwords, 25)
     return vocabulario_sin_stopwords
-
-"""# Funciones steemer: Extraer las raíces de las palabras"""
 
 #
 # Esta función devuelve un dataframe con el vocabulario inicial, eliminando las raíces repetidas 

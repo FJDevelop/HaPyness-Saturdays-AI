@@ -18,7 +18,6 @@ import prg_stemmer as stem
 # Revisar si se puede ampliar con más criterios para dejarlo todavía más limpio
 
 def limpia_tweet(text):
-  glb.stopWords = set(glb.stopwords.words('spanish'))
   text = str(text)
   text = re.sub(r'@[A-Za-z0-9]+', ' ', text) #Remover menciones @
   text = re.sub(r'RT[|\s]', ' ', text) # Remover RTs
@@ -46,7 +45,10 @@ def limpia_tweet(text):
   words = nltk.regexp_tokenize(text, pattern)
   re_punc = re.compile('[%s]' % re.escape(string.punctuation)) # Remover signos de puntuacion
   stripped = [re_punc.sub('', w) for w in words]
-  no_garbage = [w for w in stripped if (w.lower() not in glb.stopWords) or (w.lower() in glb.stopwords_permitidas)] # Remover stopwords, salvo que estén las stopwords expresamente permitidas
+
+  ### glb.stopWords = set(glb.stopwords.words('spanish'))
+  ### no_garbage = [w for w in stripped if (w.lower() not in glb.stopWords) or (w.lower() in glb.stopwords_permitidas)] ### Remover stopwords, salvo que estén las stopwords expresamente permitidas
+  no_garbage = [w for w in stripped if (w.lower() not in glb.vocabulario_sin_stopwords)] # Remover stopwords
 
   return (" ".join(no_garbage))
 
@@ -79,9 +81,7 @@ def valora_tweet(vocabulario_base_pd, texto_tweet):
             # print ("valora_tweet_01:", palabra_buscada_stemmed)
             palabra_vocabulario = vocabulario_base_pd[vocabulario_base_pd.Stemmed == palabra_buscada_stemmed]
 
-            # if str(palabra_vocabulario) not in spanish_stopwords : 
-            # Con esta comprobación pasaría de tardar en procesar 1977 palabras en 67s a 113s, 
-            # Evita el riesgo de que el stemm genere una palabra que acabe siendo una raíz incluida en el vocabulario, 
+            # Evita el riesgo de que el stemmer genere una palabra que acabe siendo una raíz incluida en el vocabulario, 
             # pero el riesgo de que ocurra es muy bajo
             aux.debug_print ("VT02 "+ "Buscada: " + palabra_buscada_stemmed)
             cantidad_encontradas = len(palabra_vocabulario)

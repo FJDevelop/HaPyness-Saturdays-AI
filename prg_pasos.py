@@ -23,6 +23,7 @@ import string
 from sklearn.feature_extraction.text import CountVectorizer
 from string import punctuation
 from collections import Counter
+from nltk.corpus import stopwords
 
 # Fichero .py propios del proyecto
 import prg_auxiliares as aux
@@ -46,10 +47,10 @@ def PASO_1_importa_vocabulario():
 
     new_names = ['Palabra','Sentimiento','Valoracion']
     #          Sin csv, sería: vocabulario = (("abandonado","Triste", -1), ("abandonar","Triste", -2), ("abandono", "Triste", -1))
-    glb.vocabulario_pd = glb.pd.read_csv(glb.const_directorio_fichero + "IN_FelizTriste.csv", names=new_names, skiprows=1, delimiter=";", encoding='latin1', index_col=False)
+    glb.vocabulario_pd_csv = glb.pd.read_csv(glb.const_directorio_fichero + "IN_FelizTriste.csv", names=new_names, skiprows=1, delimiter=";", encoding='latin1', index_col=False)
 
-    aux.debug_pd ("LEE VOCABULARIO", glb.vocabulario_pd.head(5), 25)
-    aux.debug_pd ("PALABRAS", glb.vocabulario_pd['Palabra'], 25)
+    aux.debug_pd ("LEE VOCABULARIO", glb.vocabulario_pd_csv.head(5), 25)
+    aux.debug_pd ("PALABRAS", glb.vocabulario_pd_csv['Palabra'], 25)
 
 #
 # PASO 2: Prepara vocabulario stemmed (vocabulario_stemmed_pd)
@@ -59,6 +60,12 @@ def PASO_2_prepara_vocabulario():
     
     print ("PASO 2: Preparar vocabulario")
     
+    # Carga de las stopwords standard
+    print ('*** Para cargar las stops words introducir: ***\n\nOpción d) -> stopwords -> q\n')
+    nltk.download('stopwords')
+    glb.spanish_stopwords = stopwords.words('spanish')
+    print ('Stopwords descargadas, continúa la ejecución...')
+
     # Se asegura de que el vocabulario no incluye stopwords
     glb.vocabulario_sin_stopwords = stem.quita_stopwords(glb.vocabulario_pd)
     #

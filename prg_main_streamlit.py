@@ -24,7 +24,7 @@ def imprime_valoracion(valoracion):
        st.text("Valoración calculada: estás feliz")
     elif valoracion == -1:
        st.text("Valoración calculada: estás triste")
-    st.write(glb.palabras_encontradas)
+    # st.write(glb.palabras_encontradas) # Opcional, sólo para ver la versión textual y depurar
     palabras_encontradas_lista_pd = pd.DataFrame(glb.palabras_encontradas_lista, columns = ["Raíz", "Valoración"])
     st.table(palabras_encontradas_lista_pd)
 
@@ -41,7 +41,7 @@ def calcula_felicidad(texto):
 #
 def principal_streamlit():
     icon_image = Image.open('img_icono_HaPyness.png')  
-    st.set_page_config(page_title='Ofertas de Empleo en Aragón', layout="centered", page_icon=icon_image) # layout = "centered", "wide"
+    st.set_page_config(page_title='HaPyness: ¿Aragón feliz?', layout="centered", page_icon=icon_image) # layout = "centered", "wide"
 
     st.image("img_Saturdays_HaPyness.png")
     # st.write("https://saturdays.ai/")
