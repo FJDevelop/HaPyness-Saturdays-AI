@@ -1,5 +1,5 @@
 # HaPyness: ¿Aragón feliz?
- Saturdays AI - Felicidad o tristeza
+ Saturdays AI - Zaragoza - Equipo 6
  
 ![image](https://user-images.githubusercontent.com/99982689/154822111-34f89283-5cbd-4304-a4e7-7bb896a4757f.png)
 
@@ -17,6 +17,11 @@
 ## Ejemplos de uso
 
 ## Requirements
+> Google Colab
+> Visual Studio Code
+> Conda
+> Streamlit
+> Ficheros de entrada para el vocabulario y los tweets (ver más adelante)
 
 ## Participantes 
 Virginia Navarro  
@@ -25,7 +30,12 @@ Fernando Jiménez
 
 ## Próximos pasos
 
-En cuanto a la versión algorítmica, mediante los fichero de salida (OUT_es_*) se pueden analizar las palabras sospechosas de generar fallos respecto a los tweets del DASS, analizar el impacto de las diferentes palabras del vocabulario en los errores de valoración de cada tweet, la efectividad del stemmer y la comparación de la valoración humana del TASS con la valoración automática (ver ficheros de salida más abajo) 
+En cuanto a la versión automática, mediante los fichero de salida (OUT_es_*) se puede: analizar las palabras sospechosas de generar fallos generales respecto a los tweets del DASS, analizar el impacto de las diferentes palabras del vocabulario en los errores de valoración de cada tweet, revisar la precisión del stemmer, y obtener la comparación entre la valoración humana del TASS con la valoración automática (ver ficheros de salida más abajo) 
+
+Con todos estos ficheros se podría:
+* Realizar más ajustes en el vocabulario de entrada. Esto exige de numerosas pruebas (y tiempo de proceso)  
+* Ajustar el stemmer, para no considerar palabras confusas, se podría incluso probar la efectividad de otros stemmer  
+* Someter el cálculo automático a tweets de otras versiones del TASS que ofrecen valoración humana, ajustando el vocabulario nuevamente para cubrir el máximos de TASS valorados humanos  
 
 ## Referencias
 ---> Copiar las referencias del artículo
@@ -56,9 +66,13 @@ Los módulos principales son los siguientes:
  Para la parte interactiva de streamlit sólo se ejecutan los pasos 1 y 2  
  
   > PASO 1: Importar el vocabulario  
-  > PASO 2: Prepara vocabulario stemmed  
+  > PASO 2: Prepara vocabulario stemmed
+![image](https://user-images.githubusercontent.com/99982689/154822546-87e17b04-1903-41a2-8783-090e90cde1cb.png)
+
   > PASO 3: Lee los tweets del csv  
   > PASO 4: Valora tweets del csv  
+![image](https://user-images.githubusercontent.com/99982689/154822587-f3468882-d3ae-4597-960a-8fc41054dcba.png)
+
 * prg_stemmer.py => Funciones relativas al stemmer de palabras y del vocabulario en csv
 * prg_tweets.py => Funciones relativas a la limpieza/preparación y valoración automática de tweets
 
