@@ -1,12 +1,17 @@
-import pandas as pd
-import string
-from nltk.stem import SnowballStemmer
+###
+#
+# Funciones relativas al stemmer de palabras y del vocabulario
+#
+###
 
+import pandas as pd
 import prg_globales as glb
 import prg_auxiliares as aux
+#### import string
 
 #
-# Atención usar antes del stemmer, aún no existe en este punto la columna 'Stemmed'
+# Quita las stopwords del <vocabulario_pd>
+# Atención: usar antes del stemmer, aún no existe en este punto la columna 'Stemmed'
 #
 def quita_stopwords(vocabulario_pd):
     vocabulario_sin_stopwords = glb.pd.DataFrame(columns=['Palabra','Sentimiento','Valoracion'])
@@ -22,16 +27,19 @@ def quita_stopwords(vocabulario_pd):
 
 #
 # Esta función devuelve un dataframe con el vocabulario inicial, eliminando las raíces repetidas 
+# Basado en el stemmer de español
 #
-# Usar el stemmer de español
-# stemmer es una global
-stemmer = SnowballStemmer('spanish')
 
+#
+# Aplica el stem a una sola <palabra_original>
+#
 def stem_palabra(palabra_original):
-    palabra_revisada = aux.elimina_signos_puntuacion(stemmer.stem(palabra_original))
-    # print ("stem_palabra", palabra_revisada)
+    palabra_revisada = aux.elimina_signos_puntuacion(glb.stemmer.stem(palabra_original))
     return palabra_revisada
 
+#
+# Aplica el stemmer al <vocabulario_pd> dado
+#
 def stem_vocabulario(vocabulario_pd):
     # Obtiene la columna stemmed y la coloca en la columna <Stemmed>
     vocabulario_stemmed = pd.DataFrame(columns=['Palabra','Sentimiento','Valoracion', 'Stemmed'])
@@ -43,6 +51,8 @@ def stem_vocabulario(vocabulario_pd):
                  'Stemmed':palabra_revisada}
         vocabulario_stemmed = vocabulario_stemmed.append(linea, ignore_index=True)
         print (".", end="")
+        if (num_fila % 100) == 0:
+            print (num_fila, end="")
 
     # Quita los posibles duplicados resultantes del stem
     vocabulario_stemmed = vocabulario_stemmed.drop_duplicates(subset=['Sentimiento', 'Valoracion', 'Stemmed'], ignore_index=True)

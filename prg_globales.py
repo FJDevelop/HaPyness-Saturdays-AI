@@ -1,5 +1,10 @@
+###
+#
+# Variables globales
+#
+###
+
 import pandas as pd
-import nltk
 
 # Si esta activo el debug imprime los textos de debug
 global debug_activado
@@ -41,6 +46,9 @@ vocabulario_pd_csv = pd.DataFrame()
 
 # Pandas con el vocabulario steemed
 global vocabulario_stemmed_pd
+
+# Objeto stemmer
+global stemmer
 
 # Pandas con los tweets del csv
 global tweets_pd

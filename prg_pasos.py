@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+###
 #
 # Preparatorio antes de ejecutar
 # 
@@ -13,6 +13,8 @@
 #     Si se producen errores es porque hay una misma raíz valorada con valores contradictorios
 #   - OUT_es.csv => es_IN.csv pero con una columna adicional con la valoración calculada
 #   - OUT_es_errores.csv => tweets en los que la valoración del corpus y la calculada son diferentes
+#
+###
 
 # Nomenclatura: los comentarios con ## se pueden borrar en la versión final 
 
@@ -20,10 +22,9 @@ import nltk
 import pandas as pd
 import string
 
-from sklearn.feature_extraction.text import CountVectorizer
-from string import punctuation
 from collections import Counter
 from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
 
 # Fichero .py propios del proyecto
 import prg_auxiliares as aux
@@ -36,17 +37,16 @@ import prg_globales as glb
 #
 # PASO 1: Importar el vocabulario
 #
-
 def PASO_1_importa_vocabulario():
     # Dada una lista de vocabulario, genera otra con las palabras steemed 
     # (steemed significa con sólo las raíces
     # Genera la misma tabla inicial con una columna al final, con la raíz)
     # Ejemplo: abandonado, abandonar, abandono => abandon
 
-    print ("PASO 1: Importar vocabulario")
+    glb.stemmer = SnowballStemmer('spanish')
 
     new_names = ['Palabra','Sentimiento','Valoracion']
-    #          Sin csv, sería: vocabulario = (("abandonado","Triste", -1), ("abandonar","Triste", -2), ("abandono", "Triste", -1))
+    # Sin entrada csv, para debug directo, sería: vocabulario_pd_csv = (("abandonado","Triste", -1), ("abandonar","Triste", -2), ("abandono", "Triste", -1))
     glb.vocabulario_pd_csv = glb.pd.read_csv(glb.const_directorio_fichero + "IN_FelizTriste.csv", names=new_names, skiprows=1, delimiter=";", encoding='latin1', index_col=False)
 
     aux.debug_pd ("LEE VOCABULARIO", glb.vocabulario_pd_csv.head(5), 25)
@@ -55,11 +55,7 @@ def PASO_1_importa_vocabulario():
 #
 # PASO 2: Prepara vocabulario stemmed (vocabulario_stemmed_pd)
 #
-
 def PASO_2_prepara_vocabulario():
-    
-    print ("PASO 2: Preparar vocabulario")
-    
     # Carga de las stopwords standard
     print ('*** Para cargar las stops words introducir: ***\n\nOpción d) -> stopwords -> q\n')
     nltk.download('stopwords')
@@ -67,7 +63,8 @@ def PASO_2_prepara_vocabulario():
     print ('Stopwords descargadas, continúa la ejecución...')
 
     # Se asegura de que el vocabulario no incluye stopwords
-    glb.vocabulario_sin_stopwords = stem.quita_stopwords(glb.vocabulario_pd)
+    glb.vocabulario_sin_stopwords = stem.quita_stopwords(glb.vocabulario_pd_csv)
+
     #
     # Aplica el stemmer al vocabulario inicial
     # Deja sólo las raices de las palabras y elimina los acentos
@@ -79,11 +76,7 @@ def PASO_2_prepara_vocabulario():
 #
 # PASO 3: Lee los tweets
 #
-
 def PASO_3_lee_tweets():
-
-    print ("PASO 3: Leer tweets")
-
     # Lee los tweets del corpus
     new_names = ['ID','texto_tweet_original','valoracion_corpus', 'Texto_tweet']
     glb.tweets_pd = pd.read_csv(glb.const_directorio_fichero + 'IN_train.csv', names=new_names, skiprows=1, delimiter=';', encoding='UTF-8') # Si no va con UTF-8 usar latin1, depende del csv
@@ -103,11 +96,7 @@ def PASO_3_lee_tweets():
 # a la vez que detecta cuándo la valoración del tweet y la calculada son diferentes
 # En ese caso genera un dataframe con las diferencias <errores_valoracion>
 #
-
 def PASO_4_valora_tweets():
-    
-    print ("PASO 4: Valorar tweets")
-    
     palabras_encontradas = []
     palabras_encontradas_lista = []
     palabras_encontradas_sospechosas = []
@@ -162,7 +151,6 @@ def PASO_4_valora_tweets():
 #
 # Guardado de resultados
 #
-
 def guarda_resultados():
     # Guarda el vocabulario stemmed para su revisión cuando hay repetidos que generan errores
     glb.vocabulario_stemmed_pd.to_csv(glb.const_directorio_fichero + "OUT_FelizTriste_stemmed.csv", sep=";", encoding='latin1')

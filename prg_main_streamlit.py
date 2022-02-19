@@ -1,6 +1,10 @@
+###
 #
-# Imports e instalación en conda de las librerias necesarias
+# Bucle principal de streamlit. 
+# Cuando se desea ejecutar la versión streamlit, se ejecuta prg_main_streamlit.py
+# Cuando se desea valorar tweets en base al vocabulario, se ejecuta prg_main_calculo.py
 #
+###
 
 # Preparatorio streamlit: conda install streamlit 
 import streamlit as st
@@ -17,6 +21,10 @@ from PIL import Image
 #
 # Funciones usadas en este módulo para la versión web con streamlit
 #
+
+#
+# Según sea la valoración imprime con streamlit el estado de felicidad
+#
 def imprime_valoracion(valoracion):
     if valoracion == 0:
         st.text("Valoración calculada: estás neutro")
@@ -28,6 +36,9 @@ def imprime_valoracion(valoracion):
     palabras_encontradas_lista_pd = pd.DataFrame(glb.palabras_encontradas_lista, columns = ["Raíz", "Valoración"])
     st.table(palabras_encontradas_lista_pd)
 
+#
+# Calcula la felicidad según el <texto> dado
+#
 def calcula_felicidad(texto):
     if glb.vocabulario_preparado:
         st.text("Eliminados: emoticonos, hastag, menciones, abreviaturas, retweets, URL, links, símbolos, monedas...")
@@ -36,7 +47,7 @@ def calcula_felicidad(texto):
 
 #
 # Atención: las variables globales han de estar fuera, porque la ejecución de streamlit es cíclica 
-# y si se inicializan al principio, se inicializan en cada ciclo
+# Si se inicializan al principio del bucle, se inicializan en cada ciclo
 # Ver aquí como itera streamlit: https://docs.streamlit.io/library/get-started/main-concepts#app-model 
 #
 def principal_streamlit():
@@ -44,13 +55,13 @@ def principal_streamlit():
     st.set_page_config(page_title='HaPyness: ¿Aragón feliz?', layout="centered", page_icon=icon_image) # layout = "centered", "wide"
 
     st.image("img_Saturdays_HaPyness.png")
-    # st.write("https://saturdays.ai/")
+    # st.write("https://saturdays.ai/") # Opcional
     st.title("HaPyness: ¿Aragón feliz?")
     st.header("Análisis algorítmico de sentimientos")
-    # st.subheader("--")
+    # st.subheader("--") # Info
 
     #
-    # Si no se ha cargado y procesado el vocabulario, lo prepar
+    # Si no se ha cargado y procesado el vocabulario, lo prepara
     #
     if not glb.vocabulario_preparado:
         if st.button('Preparar vocabulario'):
@@ -70,9 +81,10 @@ def principal_streamlit():
             st.stop()
     #
     # Si el vocabulario está cargado, muestra el campo con el tweet a valorar
+    # Por defecto propone un texto, para hacer comprobaciones cuando se realizan cambios en el código
     #
-    # Atención, streamlit ejecuta en orden secuencial, el else se ejecuta en el siguiente ciclo, 
-    # cuando cambia un campo por interacción del usuario!!!
+    # Atención, streamlit ejecuta este bucle en orden secuencial, el else se ejecuta en el siguiente ciclo, 
+    # cuando cambia un campo por interacción del usuario (!)
     #
     else:
         st.subheader("¡Anímate a tweetear!")
@@ -81,11 +93,13 @@ def principal_streamlit():
         if st.button('¿Feliz o triste'):
             calcula_felicidad(user_input)
 
+        # Muestra algunos ejemplos para pruebas o demostraciones
         st.write("Ejemplo 1: Es una pena, cada vez hay menos felicidad :(")
         st.write("Ejemplo 2: Si me dices lo que piensas me das una alegría :)")
         st.write("Ejemplo 3: Sí es mejor que morirse :|")
         st.write("Ejemplo 4: Que pena, no me das una alegría :(")
 
+# Ejecuta el bucle principal de streamlit
 principal_streamlit()
 
 # INFO AYUDA FORMATEADO WEB:

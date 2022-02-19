@@ -1,22 +1,23 @@
-###############################
+###
 #
-# Funciones relativas a los tweets
+# Funciones relativas a la limpieza, preparación y valoración automática de tweets
 #
-###############################
+###
 
 import re
 import nltk
 import string
+#### from string import punctuation
 
 import prg_globales as glb
 import prg_auxiliares as aux
 import prg_stemmer as stem
 
+#
 # LIMPIEZA DE TWEETS: elimina menciones @, retweets, #, links y TAGS
 #
-# Creamos la funcion limpia_tweet (inicialmente 'transform') que va a remover stopwords y algunos caracteres peculiares de twitter
-# Revisar si se puede ampliar con más criterios para dejarlo todavía más limpio
-
+# La funcion limpia_tweet elimina stopwords y algunos caracteres peculiares de twitter
+# 
 def limpia_tweet(text):
   text = str(text)
   text = re.sub(r'@[A-Za-z0-9]+', ' ', text) #Remover menciones @
@@ -46,23 +47,20 @@ def limpia_tweet(text):
   re_punc = re.compile('[%s]' % re.escape(string.punctuation)) # Remover signos de puntuacion
   stripped = [re_punc.sub('', w) for w in words]
 
-  ### glb.stopWords = set(glb.stopwords.words('spanish'))
-  ### no_garbage = [w for w in stripped if (w.lower() not in glb.stopWords) or (w.lower() in glb.stopwords_permitidas)] ### Remover stopwords, salvo que estén las stopwords expresamente permitidas
   no_garbage = [w for w in stripped if (w.lower() not in glb.vocabulario_sin_stopwords)] # Remover stopwords
 
   return (" ".join(no_garbage))
 
   # df['tweets_transform'] = df['text'].apply(transform)
 
+#
+# Preparación del tweet: eliminación de signos de puntuación y limpieza de elementos típicos de un tweet
+#
 def prepara_tweet(texto_tweet):
     tweet_final = aux.elimina_signos_puntuacion(texto_tweet)
     tweet_final = limpia_tweet(tweet_final)
-    # print ('Sin signos: ' + tweet_final)
     # tweet_final = repara_acentos(tweet_final) -> no es preciso si se abre en UTF-8
-    # print ('Sin acentos: ' + tweet_final)
     return tweet_final
-
-"""# Funciones tweets - Valorar sentimientos con el vocabulario steemed"""
 
 def valora_tweet(vocabulario_base_pd, texto_tweet):
     if texto_tweet is not None:
@@ -76,7 +74,7 @@ def valora_tweet(vocabulario_base_pd, texto_tweet):
         for palabra_buscada in palabras_tweet:
             ## Alternativo: palabra_vocabulario = vocabulario_base_pd.query('Palabra == "'+ palabra_buscada +'"')
             # Averigua si la palabra_buscada está en el vocabulario. 
-            # Ambas deben tener el stemm aplicado
+            # Ambas deben tener el stem aplicado
             palabra_buscada_stemmed = stem.stem_palabra(palabra_buscada)
             # print ("valora_tweet_01:", palabra_buscada_stemmed)
             palabra_vocabulario = vocabulario_base_pd[vocabulario_base_pd.Stemmed == palabra_buscada_stemmed]
