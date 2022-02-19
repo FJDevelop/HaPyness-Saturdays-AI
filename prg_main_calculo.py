@@ -3,7 +3,7 @@
 # Bucle principal de cálculo de valoraciones
 #
 # En base al vocabulario (IN_FelizTriste.csv), y al fichero de tweets (IN_train.csv),
-# calcula algorítmicamente la valoración, según las palabras del vocabulario sean tristes o felices
+# calcula automáticamente la valoración, según las palabras del vocabulario sean tristes o felices
 # 
 # Genera los ficheros de salida para su análisis:
 # 

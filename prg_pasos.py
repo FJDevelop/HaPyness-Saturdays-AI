@@ -1,12 +1,13 @@
 ###
 #
-# Preparatorio antes de ejecutar
+# Pasos realizados para el cálculo automático de felicidad (pasos 1 a 4)
+# Para la parte interactiva de streamlit sólo se ejecutan los pasos 1 y 2
 # 
 # Ficheros utilizados:
 #
 # Entrada (añadirlo a Colab antes de ejecutar):
 #   - IN_FelizTriste.csv => vovabulario previamente valorado en un excel
-#   - IN_es.csv => tweets
+#   - IN_es.csv => Tweets en csv
 #
 # Salida
 #   - OUT_FelizTriste_stemmed.csv =s contiene las raíces de "FelizTristeIN.csv", eliminado duplicadas. 
@@ -49,8 +50,8 @@ def PASO_1_importa_vocabulario():
     # Sin entrada csv, para debug directo, sería: vocabulario_pd_csv = (("abandonado","Triste", -1), ("abandonar","Triste", -2), ("abandono", "Triste", -1))
     glb.vocabulario_pd_csv = glb.pd.read_csv(glb.const_directorio_fichero + "IN_FelizTriste.csv", names=new_names, skiprows=1, delimiter=";", encoding='latin1', index_col=False)
 
-    aux.debug_pd ("LEE VOCABULARIO", glb.vocabulario_pd_csv.head(5), 25)
-    aux.debug_pd ("PALABRAS", glb.vocabulario_pd_csv['Palabra'], 25)
+    aux.debug_pd ("LEE VOCABULARIO", glb.vocabulario_pd_csv.head(5), 15)
+    aux.debug_pd ("PALABRAS", glb.vocabulario_pd_csv['Palabra'], 15)
 
 #
 # PASO 2: Prepara vocabulario stemmed (vocabulario_stemmed_pd)
@@ -74,7 +75,7 @@ def PASO_2_prepara_vocabulario():
     print(glb.vocabulario_stemmed_pd.head(25))
 
 #
-# PASO 3: Lee los tweets
+# PASO 3: Lee los tweets del csv
 #
 def PASO_3_lee_tweets():
     # Lee los tweets del corpus
@@ -90,7 +91,7 @@ def PASO_3_lee_tweets():
     glb.tweets_pd.info
 
 #
-# PASO 4: Valora tweets
+# PASO 4: Valora tweets del csv
 #
 # Dada una lista de tweets, genera otra con los tweets valorados, 
 # a la vez que detecta cuándo la valoración del tweet y la calculada son diferentes
@@ -168,7 +169,6 @@ def guarda_resultados():
     # Convierte la serie a pandas para exportar a csv
     # print("GR02: ", glb.palabras_encontradas_sospechosas_resumen)
     glb.palabras_encontradas_sospechosas_resumen_pd = pd.DataFrame(pd.Series(glb.palabras_encontradas_sospechosas_resumen), columns=['Palabra_sospechosa'])
-    #### glb.palabras_encontradas_sospechosas_resumen_pd = pd.DataFrame.from_dict(glb.palabras_encontradas_sospechosas_resumen, orient='index', columns=['Palabra_sospechosa', 'k'])
     # print("GR03: ", glb.palabras_encontradas_sospechosas_resumen_pd.shape)
 
     # Ordena de forma descendente, primero las  palabras sospechosas más frecuentes

@@ -41,9 +41,6 @@ global vocabulario_sin_stopwords
 global vocabulario_pd_csv
 vocabulario_pd_csv = pd.DataFrame()
 
-# Pandas con el vocabulario leído del csv
-##### global vocabulario_base_pd
-
 # Pandas con el vocabulario steemed
 global vocabulario_stemmed_pd
 

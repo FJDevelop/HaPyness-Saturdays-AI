@@ -1,6 +1,6 @@
 ###
 #
-# Funciones auxiliares
+# Funciones auxiliares: debug y complementos
 #
 ###
 

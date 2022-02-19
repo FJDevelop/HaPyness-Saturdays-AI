@@ -1,13 +1,12 @@
 ###
 #
-# Funciones relativas al stemmer de palabras y del vocabulario
+# Funciones relativas al stemmer de palabras y del vocabulario en csv
 #
 ###
 
 import pandas as pd
 import prg_globales as glb
 import prg_auxiliares as aux
-#### import string
 
 #
 # Quita las stopwords del <vocabulario_pd>

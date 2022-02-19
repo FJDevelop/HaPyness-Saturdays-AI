@@ -7,7 +7,6 @@
 import re
 import nltk
 import string
-#### from string import punctuation
 
 import prg_globales as glb
 import prg_auxiliares as aux

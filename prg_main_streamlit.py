@@ -57,7 +57,7 @@ def principal_streamlit():
     st.image("img_Saturdays_HaPyness.png")
     # st.write("https://saturdays.ai/") # Opcional
     st.title("HaPyness: ¿Aragón feliz?")
-    st.header("Análisis algorítmico de sentimientos")
+    st.header("Análisis automático de sentimientos")
     # st.subheader("--") # Info
 
     #
