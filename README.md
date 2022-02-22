@@ -3,8 +3,31 @@
  
 ![image](https://user-images.githubusercontent.com/99982689/154822111-34f89283-5cbd-4304-a4e7-7bb896a4757f.png)
 
-## Breve resumen o descripción
----> Copiar los objetivos del ppt/artículo
+
+## La inspiración
+> La contingencia sanitaria Covid-19 ha ocasionado circunstancias excepcionales con alto impacto en la sociedad, confinamiento masivo, soledad, incertidumbre, crisis económica, sanitaria y social, lo cual ha generado diferentes tipos de reacciones en la población, incrementando las patologías presentes tanto físicas como psíquicas, problemas económicos, entre otros. 
+
+Algunos datos:
+* 1 de cada 5 personas que han pasado Covid se ha enfrentado por primera vez a un diagnóstico de ansiedad, depresión o insomnio
+* 1/3 personas adultas reportan niveles de angustia.1/2  en la población más joven. 
+* 6,4% de la población ha acudido a un/a profesional de la salud mental desde que se inició la pandemia (más del doble fueron mujeres)
+* 5,8% ha recibido tratamiento psicológico
+* 8%-10% incremento de los pensamientos suicidas, especialmente en personas jóvenes. 
+
+## Problema
+> 
+> Dada la situación de pandemia vivida a lo largo del último año queremos analizar cómo esta situación ha podido afectar a la percepción general a nivel psicológico de los ciudadanos de Aragón, y cómo ha podido influir este estado respecto a diferentes temáticas (inferidas o prefijadas) en sus comentarios en diferentes medios, redes sociales, prensa, etc.
+>
+> Existe una alta complejidad a la hora de realizar un análisis de sentimientos (etiquetado manual, tiempo, ambigüedad y alto riesgo de errores)
+
+
+## Solución
+> Objetivo 1: Brindar a la sociedad una herramienta que de un etiquetado automático y subsane la complejidad de un etiquetado manual, facilite la labor y reduzca la ambigüedad y el error.
+Demostrar que la herramienta es viable y desarrollo de toda la metodología
+>
+> Objetivo 2: Desarrollar un modelo que analice la evolución del sentimiento de los ciudadanos en Aragón respecto a diferentes temáticas (inferidas o pre-fijadas), teniendo en cuenta redes sociales, prensa, etc. Y en función del análisis realizado realice recomendaciones. 
+>
+
 
 ## Dataset
 * Para el cálculo algorítmico de felicidad se han usado como referencia de contraste las valoraciones humanas del fichero TASS20_Datasets\Datasets\Task2\train.tsv
@@ -12,7 +35,9 @@
 * Los resultados del cálculo algorítmico se han utilizado para entrenar la IA ---> indicar cómo se ha comparado la IA con el cálculo alhorítmico etc
 
 ## Modelos
----> Indicar los modelos utilizados
+* Random Forest
+* SVM
+* XGBoost
 
 ## Ejemplos de uso
 
