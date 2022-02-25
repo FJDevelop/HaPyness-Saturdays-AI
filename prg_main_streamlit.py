@@ -9,6 +9,9 @@
 # Preparatorio streamlit: conda install streamlit 
 import streamlit as st
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.express as px
 
 # Tras ejecutar este módulo en VS Code, ejecutar en la línea de comandos para que se lance el Web explorer:
 #   streamlit run "c:/Users/fjime/Google Drive/Principal/Fernando/Curso IA/Proyecto/Proyecto VS Code/prg_main_streamlit.py"
@@ -90,7 +93,7 @@ def principal_streamlit():
         st.subheader("¡Anímate a tweetear!")
         user_input = st.text_input("", "Estoy entristecido, apenado, pero a la vez feliz, contento")
 
-        if st.button('¿Feliz o triste'):
+        if st.button('¿Feliz o triste?'):
             calcula_felicidad(user_input)
 
         # Muestra algunos ejemplos para pruebas o demostraciones
@@ -99,7 +102,29 @@ def principal_streamlit():
         st.write("Ejemplo 3: Sí es mejor que morirse :|")
         st.write("Ejemplo 4: Que pena, no me das una alegría :(")
 
+    if "Ver gráficas" not in st.session_state:
+        felicidad_fechas_pd = glb.pd.read_csv("OUT_por_fechas.csv", 
+                            names = ['Fecha', 'valoracion_calculada', 'Covid', 'Numero_Tweets'], 
+                            skiprows=1, delimiter=";", encoding='latin1', index_col=False)
+        df6 = pd.DataFrame(felicidad_fechas_pd.value_counts()).reset_index()
+        df6 = df6.sort_values(by ='Fecha')
+
+        plt.figure(figsize =(10,3))
+        sns.set_theme(context = 'talk')
+    # else:
+    if st.button('Ver gráficas'):
+        fig = px.line(x=df6['Fecha'], y=df6['Numero_Tweets'], color = df6['valoracion_calculada'],
+              labels={
+                     "y": "Número de tweets",
+                     "x": "",
+                     "color": "Valoración calculada"
+                 },)
+        st.plotly_chart(fig, use_container_width=True)
+        print("Dibujando en streamlit")
+
+#
 # Ejecuta el bucle principal de streamlit
+#
 principal_streamlit()
 
 # INFO AYUDA FORMATEADO WEB:
