@@ -48,7 +48,7 @@ def PASO_1_importa_vocabulario():
 
     new_names = ['Palabra','Sentimiento','Valoracion']
     # Sin entrada csv, para debug directo, sería: vocabulario_pd_csv = (("abandonado","Triste", -1), ("abandonar","Triste", -2), ("abandono", "Triste", -1))
-    glb.vocabulario_pd_csv = glb.pd.read_csv(glb.const_directorio_fichero + "IN_FelizTriste.csv", names=new_names, skiprows=1, delimiter=";", encoding='latin1', index_col=False)
+    glb.vocabulario_pd_csv = glb.pd.read_csv(glb.const_directorio_fichero + "IN\IN_FelizTriste.csv", names=new_names, skiprows=1, delimiter=";", encoding='latin1', index_col=False)
 
     aux.debug_pd ("LEE VOCABULARIO", glb.vocabulario_pd_csv.head(5), 15)
     aux.debug_pd ("PALABRAS", glb.vocabulario_pd_csv['Palabra'], 15)
@@ -154,13 +154,13 @@ def PASO_4_valora_tweets():
 #
 def guarda_resultados():
     # Guarda el vocabulario stemmed para su revisión cuando hay repetidos que generan errores
-    glb.vocabulario_stemmed_pd.to_csv(glb.const_directorio_fichero + "OUT_FelizTriste_stemmed.csv", sep=";", encoding='latin1')
+    glb.vocabulario_stemmed_pd.to_csv(glb.const_directorio_fichero + "OUT\OUT_FelizTriste_stemmed.csv", sep=";", encoding='latin1')
 
     # Guarda los tweets valorados
-    glb.tweets_pd.to_csv(glb.const_directorio_fichero + "OUT_es.csv", sep=";") # con encoding='latin1' da error
+    glb.tweets_pd.to_csv(glb.const_directorio_fichero + "OUT\OUT_es.csv", sep=";") # con encoding='latin1' da error
 
     # Guarda los errores de validación
-    glb.errores_valoracion.to_csv(glb.const_directorio_fichero + "OUT_es_errores.csv", sep=";") # con encoding='latin1' da error
+    glb.errores_valoracion.to_csv(glb.const_directorio_fichero + "OUT\OUT_es_errores.csv", sep=";") # con encoding='latin1' da error
     aux.debug_pd("ERRORES VALIDACION", glb.errores_valoracion, 25)
     # print("GR01: ", glb.errores_valoracion.shape)
 
@@ -175,5 +175,5 @@ def guarda_resultados():
     glb.palabras_encontradas_sospechosas_resumen_pd = glb.palabras_encontradas_sospechosas_resumen_pd.sort_values('Palabra_sospechosa', ascending=False)
 
     # Exporta a csv las palabras sospechosas
-    glb.palabras_encontradas_sospechosas_resumen_pd.to_csv(glb.const_directorio_fichero + "OUT_es_sospechosas.csv", sep=";") # con encoding='latin1' da error
+    glb.palabras_encontradas_sospechosas_resumen_pd.to_csv(glb.const_directorio_fichero + "OUT\OUT_es_sospechosas.csv", sep=";") # con encoding='latin1' da error
     aux.debug_pd("PALABRAS SOSPECHOSAS", glb.palabras_encontradas_sospechosas_resumen_pd, 25)
