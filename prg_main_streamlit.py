@@ -116,13 +116,15 @@ def principal_streamlit():
             # st.markdown("<br><br>", unsafe_allow_html=True)
             st.image("IMG\img_ejemplo_vocabulario.gif") # No indicar width=400, porque no muestra el gif en bucle, sino una imagen fija)
 
-        #
-        # Si el vocabulario está cargado, muestra el campo con el tweet a valorar
-        # Por defecto propone un texto, para hacer comprobaciones cuando se realizan cambios en el código
-        #
-        # Atención, streamlit ejecuta este bucle en orden secuencial, el else se ejecuta en el siguiente ciclo, 
-        # cuando cambia un campo por interacción del usuario (!)
-        #
+        # with columna3:
+
+    #
+    # Si el vocabulario está cargado, muestra el campo con el tweet a valorar
+    # Por defecto propone un texto, para hacer comprobaciones cuando se realizan cambios en el código
+    #
+    # Atención, streamlit ejecuta este bucle en orden secuencial, el else se ejecuta en el siguiente ciclo, 
+    # cuando cambia un campo por interacción del usuario (!)
+    #
     else:
         with columna1:
             imprime_encabezado()
@@ -158,45 +160,61 @@ def principal_streamlit():
                     calcula_felicidad(user_input)
             with st.expander("VOCABULARIO"):
                 st.image("IMG\img_ejemplo_vocabulario.png") 
+
         with columna2:
             # st.markdown("<br><br>", unsafe_allow_html=True)
             st.image("IMG\img_ejemplo_tweets.png", width=640)
             if st.button('🔁 Reiniciar desde el principio'):
                 glb.vocabulario_preparado = False
                 st.stop()
-        # Muestra algunos ejemplos para pruebas o demostraciones, texto para copiar y pegar
-        # st.write("Ejemplo 1: Es una pena, cada vez hay menos felicidad :(")
-        # st.write("Ejemplo 2: Si me dices lo que piensas me das una alegría :)")
-        # st.write("Ejemplo 3: Sí es mejor que morirse :|")
-        # st.write("Ejemplo 4: Que pena, no me das una alegría")
 
-        # if const_boton_aragon_feliz not in st.session_state:
-        #     felicidad_fechas_pd = glb.pd.read_csv("..\Colab\COLAB_por_fechas.csv", 
-        #                         names = ['Fecha', 'valoracion_calculada', 'Covid', 'Numero_Tweets'], 
-        #                         skiprows=1, delimiter=";", encoding='latin1', index_col=False)
-        #     df6 = pd.DataFrame(felicidad_fechas_pd.value_counts()).reset_index()
-        #     df6["Suma"]=df6[""]
-        #     df6 = df6.sort_values(by ='Fecha')
+        # with columna3:
 
-        #     plt.figure(figsize =(10,3))
-        #     sns.set_theme(context = 'talk')
+        #
+        # Gestión del botón que muestra la gráfica con la evolución de tweets felices y tristes 
+        #
+        if const_boton_aragon_feliz not in st.session_state:
+            felicidad_fechas_pd = glb.pd.read_csv("Colab\COLAB_por_fechas.csv", 
+                                names = ['fecha', 'valoracion_calculada', 'periodo', 'frecuencia'], 
+                                skiprows=1, delimiter=";", encoding='latin1', index_col=False)
+            df6 = pd.DataFrame(felicidad_fechas_pd.value_counts()).reset_index()
+            df6.insert(3, "gap", df6["valoracion_calculada"] * df6["frecuencia"], True)
+            df6 = df6.sort_values(by ='fecha')
+            # print ("DF6")
+            # print (df6)
 
-        # if st.button(const_boton_aragon_feliz):
-        #     st.write("    Tweets tristes y felices por años:")
-        #     fig = px.line(x=df6['Fecha'], y=df6['Numero_Tweets'], color = df6['valoracion_calculada'],
-        #         labels={
-        #                 "y": "Número de tweets",
-        #                 "x": "",
-        #                 "color": "Valoración calculada"
-        #             },)
-        #     # fig = px.line(x=df6['Fecha'], y=df6['Numero_Tweets'],
-        #     #     labels={
-        #     #             "y": "Número de tweets",
-        #     #             "x": "",
-        #     #             "color": "Valoración calculada"
-        #     #         },)
-        #     st.plotly_chart(fig, use_container_width=True)
-        #     print("Dibujando en streamlit")
+            # df7 = df6.groupby(['fecha','periodo']).sum().reset_index()
+            # df7 = df7.sort_values(by ='fecha')
+            # print ("DF7")
+            # print (df7)
+
+        if st.button(const_boton_aragon_feliz):
+
+            st.markdown("    Tweets felices (1) y tristes (-1) por años:")
+            fig3 = px.histogram(df6, x="fecha", y="frecuencia",
+                        color='valoracion_calculada', barmode='group', labels={'fecha':'Años', 'frecuencia':'Número de tweets'}, 
+                        height=400)
+            st.plotly_chart(fig3, use_container_width=True)
+            
+            # Esta informa menos
+            # st.write("    Tweets tristes y felices por años:")
+            # fig1 = px.line(x=df6['fecha'], y=df6['frecuencia'], color = df6['valoracion_calculada'],
+            #     labels={
+            #             "y": "Número de tweets",
+            #             "x": "",
+            #             "color": "Valoración calculada"
+            #         },)
+            # st.plotly_chart(fig1, use_container_width=True)
+
+            # Opcional, por revisar
+            # st.write("    Porcentaje de felicidad y tristeza de los tweets:")
+            # fig2 = px.line(x=df7['fecha'], y=df7['gap'], #color = df7['periodo'],
+            #     labels={
+            #             "y": "Número de tweets",
+            #             "x": "",
+            #             #"color": "Valoración calculada"
+            #         },)
+            # st.plotly_chart(fig2, use_container_width=True)
 
 #
 # Ejecuta el bucle principal de streamlit
