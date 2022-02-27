@@ -1,7 +1,7 @@
 # HaPyness: ¿Aragón feliz?
  Saturdays AI - Zaragoza - Equipo 6
  
-![image](https://user-images.githubusercontent.com/99982689/154822111-34f89283-5cbd-4304-a4e7-7bb896a4757f.png)
+![image](https://user-images.githubusercontent.com/99982689/155894587-f627cbf4-6b5c-42f7-b607-f135725c60d4.png)
 
 
 ## La inspiración
@@ -101,7 +101,7 @@ Los módulos principales son los siguientes:
 * prg_stemmer.py => Funciones relativas al stemmer de palabras y del vocabulario en csv
 * prg_tweets.py => Funciones relativas a la limpieza/preparación y valoración automática de tweets
 
-Ficheros de entrada:  
+Ficheros de entrada (directorio **\IN**)  
 
 ![image](https://user-images.githubusercontent.com/99982689/154821701-b4575fb8-9ae8-40d2-b926-9e47b92b1a65.png)
 * IN_FelizTriste.csv => Vovabulario previamente valorado en un excel  
@@ -114,7 +114,7 @@ Ficheros de entrada:
  El fichero TASS20_Datasets\Datasets\Task2\train.tsv (con valoración humana manual)
  El fichero obtenido de Tweepy, basado en contextos de Aragón (sin valoración humana) 
 
-Ficheros de salida:
+Ficheros de salida (directorio **\OUT**):
 
 * OUT_FelizTriste_stemmed.csv =s contiene las raíces de "FelizTristeIN.csv", eliminado duplicadas.  
  Si se producen errores durante los cálculos es porque hay una misma raíz valorada con valores contradictorios
@@ -124,6 +124,10 @@ Ficheros de salida:
 
 ![image](https://user-images.githubusercontent.com/99982689/154821723-c0dfa5c3-5365-425d-9a54-9f0d458aea48.png)
 
+Ficheros de imágenes: directorio **\IMG**
+
 ### Valoración de felicidad con IA
+
+Ficheros Colab: directorio **\Colab**):
 
 ---> Completar
