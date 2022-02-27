@@ -1,7 +1,7 @@
 # HaPyness: ¿Aragón feliz?
  Saturdays AI - Zaragoza - Equipo 6
  
-![image](https://user-images.githubusercontent.com/99982689/154822111-34f89283-5cbd-4304-a4e7-7bb896a4757f.png)
+![image](https://user-images.githubusercontent.com/99982689/155894587-f627cbf4-6b5c-42f7-b607-f135725c60d4.png)
 
 
 ## La inspiración
