@@ -128,4 +128,6 @@ Ficheros de imágenes: directorio **\IMG**
 
 ### Valoración de felicidad con IA
 
+Ficheros Colab: directorio **\Colab**):
+
 ---> Completar
