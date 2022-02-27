@@ -80,7 +80,7 @@ def PASO_2_prepara_vocabulario():
 def PASO_3_lee_tweets():
     # Lee los tweets del corpus
     new_names = ['ID','texto_tweet_original','valoracion_corpus', 'Texto_tweet']
-    glb.tweets_pd = pd.read_csv(glb.const_directorio_fichero + 'IN_train.csv', names=new_names, skiprows=1, delimiter=';', encoding='UTF-8') # Si no va con UTF-8 usar latin1, depende del csv
+    glb.tweets_pd = pd.read_csv(glb.const_directorio_fichero + 'IN\IN_train.csv', names=new_names, skiprows=1, delimiter=';', encoding='UTF-8') # Si no va con UTF-8 usar latin1, depende del csv
 
     # Añade una columna donde se dejará la valoración calculada
     glb.tweets_pd.insert(4, "valoracion_calculada", 99.0)

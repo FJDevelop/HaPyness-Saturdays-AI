@@ -9,6 +9,12 @@ import string
 import prg_globales as glb
 
 #
+# Devuelve una cadena de texto html en el color indicado
+#
+def dime_html_texto_color(texto, color):
+    return "<span style=""color:" + color + ">" + texto + "</span>"
+
+#
 # Imprime un <titulo> seguido por un objeto pandas <variable_pandas>
 # Sólo imprimer la <cantidad_lineas> indicadas
 #
