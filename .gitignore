@@ -1,6 +1,6 @@
 # Filtro Fernando Jiménez
 IN_FelizTriste.csv
-"IN_train - *"
+IN/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
