@@ -136,7 +136,7 @@ def principal_streamlit():
 
             # Introducción interactiva de un tweet
             with st.expander("¡Anímate a tweetear 👍! ¿Estás felíz 😀 o triste 😔?"):
-                user_input = st.text_input("", "Ejemplo: Estoy entristecido, apenado, pero a la vez feliz, contento ⌨️ https://saturdays.ai/")
+                user_input = st.text_input("", "Hola, estoy entristecido, apenado, pero a la vez feliz, contento ⌨️ https://saturdays.ai/")
 
                 if st.button("¿Feliz o triste?"):
                     calcula_felicidad(user_input)
