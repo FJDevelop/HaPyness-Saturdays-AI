@@ -104,7 +104,7 @@ Los módulos principales son los siguientes:
 Ficheros de entrada (directorio **\IN**)  
 
 ![image](https://user-images.githubusercontent.com/99982689/154821701-b4575fb8-9ae8-40d2-b926-9e47b92b1a65.png)
-* IN_FelizTriste.csv => Vovabulario previamente valorado en un excel  
+* IN_FelizTriste.csv* => Vovabulario previamente valorado en un excel  
  Está basado en 3000 palabras relacionadas con 'felicidad' y 'tristeza', obtenidas en http://www.ideasafines.com.ar/buscador-ideas-relacionadas.php
  Tras el postprocesado intensivo de las mismas y formateado, se ha ajustado el vocabulario a las 2600 palabras con la menor ambigüedad posible.  
  Las 3000 palabras han sido revisadas manualmente, para eliminar ambigüedades y errores de valoración.  
@@ -116,7 +116,7 @@ Ficheros de entrada (directorio **\IN**)
 
 Ficheros de salida (directorio **\OUT**):
 
-* OUT_FelizTriste_stemmed.csv =s contiene las raíces de "FelizTristeIN.csv", eliminado duplicadas.  
+* OUT_FelizTriste_stemmed.csv* => contiene las raíces de "FelizTristeIN.csv", eliminado duplicadas.  
  Si se producen errores durante los cálculos es porque hay una misma raíz valorada con valores contradictorios
 * OUT_es.csv => es_IN.csv pero con una columna adicional con la valoración calculada  
 * OUT_es_errores.csv => tweets en los que la valoración del corpus y la calculada son diferentes
