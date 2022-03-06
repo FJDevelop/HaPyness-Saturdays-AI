@@ -62,10 +62,6 @@ Con todos estos ficheros se podría:
 * Ajustar el stemmer, para no considerar palabras confusas, se podría incluso probar la efectividad de otros stemmer  
 * Someter el cálculo automático a tweets de otras versiones del TASS que ofrecen valoración humana, ajustando el vocabulario nuevamente para cubrir el máximos de TASS valorados humanos  
 
-## Referencias
----> Copiar las referencias del artículo
----> Indicar referencia al TASS si es pública, o al menos la entidad que la gestiona
-
 ## Estructura del código
 
 ### Valoración automática de felicidad
@@ -129,5 +125,45 @@ Ficheros de imágenes: directorio **\IMG**
 ### Valoración de felicidad con IA
 
 Ficheros Colab: directorio **\Colab**):
+Ejecución en VM de google: https://colab.research.google.com/?utm_source=scs-index
 
----> Completar
+Más detalles en https://medium.com/saturdays-ai/c%C3%B3mo-nos-ha-cambiado-la-vida-en-los-%C3%BAltimos-a%C3%B1os-a0d8822a72cc
+
+## Referencias
+
+Todo el código y los datos utilizados los tienes disponibles en https://github.com/FJDevelop/HaPyness-Saturdays-AI/tree/main
+Vocabulario relacionado con felicidad y tristeza http://www.ideasafines.com.ar/buscador-ideas-relacionadas.php
+
+### Datasets. Acceso personalizado al Corpus de TASS
+Tass Corpus:
+http://tass.sepln.org/tass_data/download.php
+https://gplsi.dlsi.ua.es/sepln15/es/taller-de-analisis-de-sentimientos-en-la-sepln-tass
+
+#### Análisis del Sentimientos
+NRC Word-Emotion Association Lexicon (aka EmoLex)
+https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+
+#### Sentiment Analysis in Python
+https://neptune.ai/blog/sentiment-analysis-python-textblob-vs-vader-vs-flair
+
+#### Desarrollos
+Ejemplo sentimental Analysis en español
+https://pybonacci.org/2015/11/24/como-hacer-analisis-de-sentimiento-en-espanol-2/
+
+#### Análsis de tweets
+https://www.cienciadedatos.net/documentos/py25-text-mining-python.html
+https://www.earthdatascience.org/courses/use-data-open-source-python/intro-to-apis/social-media-text-mining-python/
+
+#### Información de interés
+https://towardsdatascience.com/natural-language-processing-feature-engineering-using-tf-idf-e8b9d00e7e76
+
+#### Herramienta para realizar la Demo.
+Streamlit: https://docs.streamlit.io/library/get-started/create-an-app
+
+### Información Covid
+
+#### Datos salud Mental afectación coronavirus
+https://consaludmental.org/sala-prensa/manifiesto-salud-mental-covid-19/
+
+#### Datos estadísticas encuestas
+https://es.statista.com/grafico/25933/efectos-mas-duraderos-de-la-pandemia-de-covid-19-en-los-ninos-y-jovenes/
