@@ -25,14 +25,16 @@ import prg_auxiliares as aux
 from PIL import Image
 
 # Texto de los botones
-const_boton_aragon_feliz = 'Ver felicidad en Aragón en los últimos años'
+const_boton_aragon_feliz = 'Ver felicidad en Aragón en los últimos años, según la IA aplicada a Tweeter'
 const_boton_ejemplo_1 = "▶️ Es una pena, cada vez hay menos felicidad :("
 const_boton_ejemplo_2 = "▶️ Si me dices lo que piensas me das una alegría :)"
 const_boton_ejemplo_3 = "▶️ Qué pena, NO me das una alegría :|"
 const_boton_ejemplo_4 = "▶️ Sí es mejor que morirse :|"
 
 const_color_verde = "#01A101"
+const_color_verde_pastel = "#9FFB8C"
 const_color_rojo = "#C40202"
+const_color_rojo_pastel = "#EB5757"
 const_color_azul = "#0000FF"
 
 # const_boton_ejemplo_5 = "▶️ Ejemplo 5: Estoy entristecido, apenado, pero a la vez feliz, contento :|"
@@ -85,7 +87,7 @@ def calcula_felicidad(texto):
 def principal_streamlit():
     icon_image = Image.open('IMG\img_icono_HaPyness.png')  
     st.set_page_config(page_title='HaPyness: ¿Aragón feliz?', layout="wide", page_icon=icon_image) # layout = "centered", "wide"
-    columna1, columna2, columna3 = st.columns(3)
+    columna1, columna2 = st.columns(2) # Opcional: columna3
 
     #
     # Si no se ha cargado y procesado el vocabulario, lo prepara
@@ -163,6 +165,7 @@ def principal_streamlit():
 
         with columna2:
             # st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<body>Corpus " + aux.dime_html_texto_color("<b>TASS</b>", const_color_verde) + " valorado manualmente"  + "</body>", unsafe_allow_html=True)
             st.image("IMG\img_ejemplo_tweets.png", width=640)
             if st.button('🔁 Reiniciar desde el principio'):
                 glb.vocabulario_preparado = False
@@ -191,9 +194,18 @@ def principal_streamlit():
         if st.button(const_boton_aragon_feliz):
 
             st.markdown("    Tweets felices (1) y tristes (-1) por años:")
+            # st.markdown("    Aragón OR Aragon OR Zaragoza OR zaragoza OR Teruel OR teruel OR Huesca OR huesca OR heraldo OR heraldo.es OR zaragozano or turolense or oscense or Zaragozano or Turolense or Oscense"
+    
+            # <template> puede ser: "plotly", "plotly_white", "plotly_dark", "ggplot2", "seaborn", "simple_white", "none". "ggplot2" es rojo y azul
+            #px.defaults.color_continuous_scale = px.colors.sequential.Blackbody
             fig3 = px.histogram(df6, x="fecha", y="frecuencia",
-                        color='valoracion_calculada', barmode='group', labels={'fecha':'Años', 'frecuencia':'Número de tweets'}, 
-                        height=400)
+                        color='valoracion_calculada', barmode='group', labels={'fecha':'Años', 'frecuencia':'Tweets'}, 
+                        height=400, template="plotly", 
+                        # category_orders={ # replaces default order by column name
+                        #     "day": ["Thur", "Fri", "Sat", "Sun"], "sex": ["Male", "Female"]},
+                        color_discrete_map={"Feliz (1.0)": const_color_verde_pastel, "Triste (-1.0)": const_color_rojo_pastel}
+                        #color_continuous_scale=[(-1, "red"),   (1, "green")]
+                        ) # Opciones para barras normalizadas y en %:  barnorm="percent") barmode='group'
             st.plotly_chart(fig3, use_container_width=True)
             
             # Esta informa menos
